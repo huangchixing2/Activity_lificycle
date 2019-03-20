@@ -11,11 +11,25 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
+    //保存数据
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String tempData = "something you just typed";
+        outState.putString("data_key", tempData);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "on create");
         setContentView(R.layout.activity_main);
+
+        //恢复数据
+        if(savedInstanceState != null){
+            String tempData = savedInstanceState.getString("data_key");
+            Log.d(TAG, tempData);
+        }
 
         Button startNormalActibity = (Button) findViewById(R.id.start_normal_activity);
         Button startDialogActibity = (Button) findViewById(R.id.start_dialog_activity);
